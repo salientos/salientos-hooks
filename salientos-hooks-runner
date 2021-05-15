@@ -7,11 +7,11 @@ Lsb_release() {
 
     if [ -z "$(grep "^DISTRIB_CODENAME=" $file)" ] ; then
         # add missing DISTRIB_CODENAME=
-        echo "DISTRIB_CODENAME=rolling" >> $file
+        echo "DISTRIB_CODENAME="Rowdy Robot" >> $file
     fi
     sed -i $file \
         -e 's|^DISTRIB_ID=.*$|DISTRIB_ID=salientos|' \
-        -e 's|^DISTRIB_CODENAME=.*$|DISTRIB_CODENAME=rolling|' \
+        -e 's|^DISTRIB_CODENAME=.*$|DISTRIB_CODENAME="Rowdy Robot"|' \
         -e 's|^DISTRIB_DESCRIPTION=.*$|DISTRIB_DESCRIPTION=\"Salient OS\"|'
 }
 
@@ -20,7 +20,7 @@ Os_release() {
     local salientosfile=/usr/lib/salientos-release
 
     sed -i $file \
-        -e 's|^NAME=.*$|NAME=\"Salient OS\"|' \
+        -e 's|^NAME=.*$|NAME=\"salientos\"|' \
         -e 's|^PRETTY_NAME=.*$|PRETTY_NAME=\"Salient OS\"|' \
         -e 's|^HOME_URL=.*$|HOME_URL=\"https://salientos.github.io\"|' \
         -e 's|^SUPPORT_URL=.*$|SUPPORT_URL=\"https://sourceforge.net/p/salient-os/discussion\"|' \
