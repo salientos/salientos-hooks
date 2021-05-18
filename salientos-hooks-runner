@@ -7,7 +7,7 @@ Lsb_release() {
 
     if [ -z "$(grep "^DISTRIB_CODENAME=" $file)" ] ; then
         # add missing DISTRIB_CODENAME=
-        echo "DISTRIB_CODENAME="Rowdy Robot" >> $file
+        echo "DISTRIB_CODENAME=\"Rowdy Robot\"" >> $file
     fi
     sed -i $file \
         -e 's|^DISTRIB_ID=.*$|DISTRIB_ID=salientos|' \

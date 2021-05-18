@@ -24,10 +24,12 @@ _other_reboot_required() {
             cmd+=("\"Reboot is recommended because of recent core system package upgrades.\"")
             /usr/bin/su $user -c "${cmd[*]}"
         done
+
     else
         # at TTY
         echo "Reboot is recommended because of recent core system package upgrades." >&2
     fi
 }
+
 _other_reboot_required
 unset -f _other_reboot_required
