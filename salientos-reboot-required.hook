@@ -25,7 +25,8 @@ Target = xorg-server*
 Target = xorg-fonts*
 
 [Action]
-Description = Inform user to reboot after certain system package upgrades.
+Description = Check if user should be informed about rebooting after certain system package upgrades.
 When = PostTransaction
 Depends = libnotify
-Exec = /usr/bin/salientos-reboot-required
+NeedsTargets
+Exec = /usr/bin/salientos-check-reboot-required
