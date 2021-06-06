@@ -5,6 +5,6 @@ Type = Package
 Target = salientos-hooks
 
 [Action]
-Description = Update Salient OS specific hooks.
+Description = Updating Salient OS specific configuration.
 When = PostTransaction
 Exec = /usr/bin/salientos-hooks-runner

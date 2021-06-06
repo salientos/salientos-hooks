@@ -20,14 +20,14 @@ Os_release() {
     local salientosfile=/usr/lib/salientos-release
 
     sed -i $file \
-        -e 's|^NAME=.*$|NAME=\"salientos\"|' \
+        -e 's|^NAME=.*$|NAME=\"Salient OS\"|' \
         -e 's|^PRETTY_NAME=.*$|PRETTY_NAME=\"Salient OS\"|' \
+        -e 's|^ID=.*$|ID=salientos|' \
+        -e 's|^ID_LIKE=.*$|ID_LIKE=arch|' \
         -e 's|^HOME_URL=.*$|HOME_URL=\"https://salientos.github.io\"|' \
         -e 's|^SUPPORT_URL=.*$|SUPPORT_URL=\"https://sourceforge.net/p/salient-os/discussion\"|' \
         -e 's|^BUG_REPORT_URL=.*$|BUG_REPORT_URL=\"https://sourceforge.net/p/salient-os/tickets\"|' \
         -e 's|^LOGO=.*$|LOGO=/usr/share/pixmaps/salientos/logo.png|' \
-        -e 's|^ID=.*$|ID=salientos|' \
-        -e 's|^ID_LIKE=.*$|ID_LIKE=arch|'
 
     if [ -z "$(grep "^ID_LIKE=" $file)" ] && [ -n "$(grep "^ID=" $file)" ] ; then
         # add missing ID_LIKE=
@@ -41,7 +41,7 @@ Os_release() {
 }
 
 Issues() {
-    sed -i 's|Arch|Salient OS|g' /etc/issue /usr/share/factory/etc/issue
+    sed -i 's|Arch Linux|Salient OS|g' /etc/issue /usr/share/factory/etc/issue
 }
 
 Main()

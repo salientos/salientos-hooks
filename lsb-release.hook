@@ -5,6 +5,6 @@ Type = Package
 Target = lsb-release
 
 [Action]
-Description = Add Salient OS specific config.
+Description = Updating Salient OS specific configuration.
 When = PostTransaction
 Exec = /usr/bin/salientos-hooks-runner lsb-release
