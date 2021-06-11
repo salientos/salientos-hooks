@@ -27,12 +27,13 @@ Os_release() {
         -e 's|^HOME_URL=.*$|HOME_URL=\"https://salientos.github.io\"|' \
         -e 's|^SUPPORT_URL=.*$|SUPPORT_URL=\"https://sourceforge.net/p/salient-os/discussion\"|' \
         -e 's|^BUG_REPORT_URL=.*$|BUG_REPORT_URL=\"https://sourceforge.net/p/salient-os/tickets\"|' \
-        -e 's|^LOGO=.*$|LOGO=/usr/share/pixmaps/salientos/logo.png|' \
+        -e 's|^LOGO=.*$|LOGO=salientos|'
 
     if [ -z "$(grep "^ID_LIKE=" $file)" ] && [ -n "$(grep "^ID=" $file)" ] ; then
         # add missing ID_LIKE=
         sed -i $file -e '/^ID=/a \ID_LIKE=arch'
     fi
+
     if [ -r $salientosfile ] ; then
         # fix BUILD_ID for Salient OS
         local buildid="$(grep "^VERSION=" $salientosfile | awk '{print $1}' | cut -d '=' -f 2)"
