@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Run salientos hooks related commands.
+
+lsb_release() {
+    local file=/etc/lsb-release
+
+    if [ -z "$(grep "^DISTRIB_CODENAME=" $file)" ] ; then
+        echo "DISTRIB_CODENAME=\"Rowdy Robot\"" >> $file
+    fi
+    sed -i $file \
+        -e 's|^DISTRIB_ID=.*$|DISTRIB_ID=SalientOS|' \
+        -e 's|^DISTRIB_DESCRIPTION=.*$|DISTRIB_DESCRIPTION=\"SalientOS\"|' \
+        -e 's|^DISTRIB_CODENAME=.*$|DISTRIB_CODENAME="Rowdy Robot"|'
+}
+
+os_release() {
+    local file=/usr/lib/os-release
+    local isodate=$(date +%Y.%m)
+	
+    sed -i $file \
+        -e 's|^NAME=.*$|NAME=SalientOS|' \
+        -e 's|^PRETTY_NAME=.*$|PRETTY_NAME=SalientOS|' \
+        -e 's|^ID=.*$|ID=salientos|' \
+		-e 's|^ANSI_COLOR=.*$|ANSI_COLOR=\"0;36;23;147;209\"|' \
+        -e 's|^HOME_URL=.*$|HOME_URL=\"https://salientos.org\"|' \
+		-e 's|^DOCUMENTATION_URL=.*$|DOCUMENTATION_URL=\"https://salientos.org\"|' \
+        -e 's|^SUPPORT_URL=.*$|SUPPORT_URL=\"https://sourceforge.net/p/salient-os/discussion\"|' \
+        -e 's|^BUG_REPORT_URL=.*$|BUG_REPORT_URL=\"https://sourceforge.net/p/salient-os/tickets\"|' \
+        -e 's|^LOGO=.*$|LOGO=salientos|' \
+
+	if [ -z "$(grep "^ID_LIKE=" $file)" ] && [ -n "$(grep "^ID=" $file)" ] ; then
+        # add missing ID_LIKE=
+        sed -i $file -e '/^ID=/a \ID_LIKE=arch'
+    fi
+}
+
+issues() {
+    sed -i 's|Arch Linux|SalientOS|g' /etc/issue /usr/share/factory/etc/issue
+}
+
+main()
+{
+    local hookname="$1"
+
+    case "$hookname" in
+        os-release)  os_release ;;
+        lsb-release) lsb_release ;;
+        "")          os_release
+                     lsb_release
+                     issues
+                     ;;
+    esac
+}
+
+main "$@"
